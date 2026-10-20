@@ -1,22 +1,39 @@
-<p align="center">
-	<img src="logo.png" width="376" height="128" alt="Winlator Logo" />
-</p>
+# Fluxlator
 
-# Winlator
+Fluxlator is a community-modified Winlator build for Android. It adds per-container **Performance**, **Balanced**, and **Compatibility** profiles, plus a **Custom** option for manual tuning.
 
-Winlator is an Android application that lets you to run Windows (x86_64) applications with Wine and Box86/Box64.<br>
-This repository stores the latest updates for the Winlator app source.<br>
-For more information and releases, please visit the main repository: https://github.com/brunodev85/winlator
+**Website:** https://jeffda67.github.io/Fluxlator/  
+**Download:** [Fluxlator releases](https://github.com/jeffda67/Fluxlator/releases)
 
-# Credits and Third-party apps
+## First APK
 
-- GLIBC Patches by [Termux Pacman](https://github.com/termux-pacman/glibc-packages)
-- Wine ([winehq.org](https://www.winehq.org/))
-- Box86/Box64 by [ptitseb](https://github.com/ptitSeb)
-- Mesa (Turnip/Zink/VirGL) ([mesa3d.org](https://www.mesa3d.org))
-- DXVK ([github.com/doitsujin/dxvk](https://github.com/doitsujin/dxvk))
-- VKD3D ([gitlab.winehq.org/wine/vkd3d](https://gitlab.winehq.org/wine/vkd3d))
-- CNC DDraw ([github.com/FunkyFr3sh/cnc-ddraw](https://github.com/FunkyFr3sh/cnc-ddraw))
+Version 0.1.0 is a debug-signed preview APK for ARM64 Android devices. It is intended for sideloading; Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
 
-Special thanks to all the developers involved in these projects.<br>
-Thank you to all the people who believe in this project.
+## Profiles
+
+- **Performance** selects the Box64 Performance preset and Essential startup services.
+- **Balanced** selects the Box64 Intermediate preset and Essential startup services.
+- **Compatibility** selects the Box64 Stability preset and Normal startup services.
+- **Custom** leaves the existing manual options available.
+
+Profiles are starting points. The best choice depends on the device, graphics driver, and game.
+
+## Build from source
+
+Requirements: JDK 17, Android SDK Platform 35, Android Build Tools 34 or later, NDK 24.0.8215888, and CMake 3.22.1.
+
+In PowerShell, run:
+
+```powershell
+./gradlew.bat assembleDebug
+```
+
+The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
+
+## Upstream and licensing
+
+Fluxlator is derived from [Winlator](https://github.com/brunodev85/winlator-app) and is not an official Winlator release. This repository keeps the upstream source history and license notices. The project is distributed under the included LGPL-2.1 license; see `LICENSE` for the full text. Third-party components retain their own licenses and credits in the source.
+
+## Limitations
+
+Fluxlator does not include Windows or game licenses. It does not guarantee that a particular Windows game will run. Use official game clients and follow each game's rules. This project does not provide anti-cheat evasion or detection bypasses.

@@ -279,7 +279,7 @@ public class ForegroundService extends Service {
 
         Notification n = notificationUtils.createForegroundNotification(
                 getNotificationContent(),
-                "Winlator",
+                getString(R.string.app_name),
                 XServerDisplayActivity.class, // Service class for the 'Exit' action
                 null, // Exit action here, not used because might cause issues
                 targetActivity // Activity class for the 'Open' (notification tap) action
@@ -371,7 +371,7 @@ public class ForegroundService extends Service {
     @NonNull
     private static String getNotificationContent() {
         ForegroundService svc = instance;
-        if (svc == null) return "Winlator is running in the background";
+        if (svc == null) return "Fluxlator is running in the background";
 
         if (sessionActive.get()) {
             return isSessionInBackground && (isDeviceLocked() || !isInPictureInPictureMode())

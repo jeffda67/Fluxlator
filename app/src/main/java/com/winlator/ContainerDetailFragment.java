@@ -164,7 +164,37 @@ public class ContainerDetailFragment extends Fragment {
         sWinVersion.setTag((byte)-1);
 
         final Spinner sBox64Preset = view.findViewById(R.id.SBox64Preset);
-        Box64PresetManager.loadSpinner(sBox64Preset, isEditMode() ? container.getBox64Preset() : preferences.getString("box64_preset", Box64Preset.DEFAULT));
+        String initialBox64Preset = isEditMode() ? container.getBox64Preset() : preferences.getString("box64_preset", Box64Preset.DEFAULT);
+        Box64PresetManager.loadSpinner(sBox64Preset, initialBox64Preset);
+
+        final Spinner sGamingProfile = view.findViewById(R.id.SGamingProfile);
+        int initialGamingProfile = getGamingProfilePosition(initialBox64Preset,
+                oldStartupSelection != -1 ? oldStartupSelection : Container.STARTUP_SELECTION_ESSENTIAL);
+        sGamingProfile.setSelection(initialGamingProfile);
+        final int[] selectedGamingProfile = {initialGamingProfile};
+        sGamingProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View selectedView, int position, long id) {
+                if (position == selectedGamingProfile[0]) return;
+                selectedGamingProfile[0] = position;
+
+                if (position == 0) {
+                    Box64PresetManager.loadSpinner(sBox64Preset, Box64Preset.PERFORMANCE);
+                    sStartupSelection.setSelection(Container.STARTUP_SELECTION_ESSENTIAL);
+                }
+                else if (position == 1) {
+                    Box64PresetManager.loadSpinner(sBox64Preset, Box64Preset.INTERMEDIATE);
+                    sStartupSelection.setSelection(Container.STARTUP_SELECTION_ESSENTIAL);
+                }
+                else if (position == 2) {
+                    Box64PresetManager.loadSpinner(sBox64Preset, Box64Preset.STABILITY);
+                    sStartupSelection.setSelection(Container.STARTUP_SELECTION_NORMAL);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         final CPUListView cpuListView = view.findViewById(R.id.CPUListView);
         final CPUListView cpuListViewWoW64 = view.findViewById(R.id.CPUListViewWoW64);
@@ -342,6 +372,13 @@ public class ContainerDetailFragment extends Fragment {
             sMouseWarpOverride.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, mouseWarpOverrideList));
             AppUtils.setSpinnerSelectionFromValue(sMouseWarpOverride, registryEditor.getStringValue("Software\\Wine\\DirectInput", "MouseWarpOverride", "disable"));
         }
+    }
+
+    private static int getGamingProfilePosition(String box64Preset, byte startupSelection) {
+        if (Box64Preset.PERFORMANCE.equals(box64Preset) && startupSelection == Container.STARTUP_SELECTION_ESSENTIAL) return 0;
+        if (Box64Preset.INTERMEDIATE.equals(box64Preset) && startupSelection == Container.STARTUP_SELECTION_ESSENTIAL) return 1;
+        if (Box64Preset.STABILITY.equals(box64Preset) && startupSelection == Container.STARTUP_SELECTION_NORMAL) return 2;
+        return 3;
     }
 
     public static String getScreenSize(View view) {

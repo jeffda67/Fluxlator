@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Winlator</string>
+    <string name="app_name">Fluxlator</string>
     <string name="run">Run</string>
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
@@ -164,10 +164,14 @@
     <string name="copy">Copy</string>
     <string name="installed_version">Installed Version</string>
     <string name="unable_to_download_file">Unable to download file</string>
-    <string name="stability">Stability</string>
+    <string name="stability">Compatibility</string>
     <string name="conservative">Conservative</string>
-    <string name="intermediate">Intermediate</string>
+    <string name="intermediate">Balanced</string>
     <string name="performance">Performance</string>
+    <string name="gaming_profile">Gaming profile</string>
+    <string name="gaming_profile_help">Performance uses fast Box64 translation and only essential Windows services to reduce background work. Balanced uses a middle-ground preset. Compatibility loads all Windows services for apps that need them. You can fine-tune settings below.</string>
+    <string name="balanced_mode">Balanced</string>
+    <string name="compatibility_mode">Compatibility</string>
     <string name="preset">Preset</string>
     <string name="you_cannot_remove_this_preset">You cannot remove this preset</string>
     <string name="you_cannot_remove_this_component_version">You cannot remove this component version</string>
@@ -352,10 +356,10 @@
     <string name="ddraw_wrapper" translatable="false">DDraw Wrapper</string>
     <string name="renderer">Renderer</string>
     <string name="default_no_override">Default (No override)</string>
-    <string name="fgs_notification_channel_desc">Keeps Winlator running in the background so a wine session is not interrupted by Android\'s background process management.</string>
+    <string name="fgs_notification_channel_desc">Keeps Fluxlator running in the background so a wine session is not interrupted by Android\'s background process management.</string>
     <string name="fgs_notification_content_container_background">A container session is running in the background</string>
     <string name="fgs_notification_content_container_foreground">There is a container session running</string>
-    <string name="fgs_notification_content_else">Winlator is running in the background</string>
+    <string name="fgs_notification_content_else">Fluxlator is running in the background</string>
     <string name="save_mem_on_run_from_steam">Save memory on run from Steam</string>
     <string name="present_mode">Present Mode</string>
 </resources>

@@ -21,6 +21,12 @@
         <item>ALSA</item>
         <item>PulseAudio</item>
     </string-array>
+    <string-array name="gaming_profile_entries">
+        <item>@string/performance</item>
+        <item>@string/balanced_mode</item>
+        <item>@string/compatibility_mode</item>
+        <item>@string/custom</item>
+    </string-array>
     <string-array name="binding_type_entries">
         <item>Keyboard</item>
         <item>Mouse</item>

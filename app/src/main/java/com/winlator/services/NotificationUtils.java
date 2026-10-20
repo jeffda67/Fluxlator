@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 
 public class NotificationUtils {
     private static final String CHANNEL_ID = "winlator_foreground_service";
-    private static final String CHANNEL_NAME = "Winlator Foreground Service";
+    private static final String CHANNEL_NAME = "Fluxlator Foreground Service";
 
     private final Context context;
     private final NotificationManager notificationManager;

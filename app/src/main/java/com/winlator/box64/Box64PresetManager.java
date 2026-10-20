@@ -84,9 +84,9 @@ public abstract class Box64PresetManager {
 
     public static ArrayList<Box64Preset> getPresets(Context context) {
         ArrayList<Box64Preset> presets = new ArrayList<>();
-        presets.add(new Box64Preset(Box64Preset.STABILITY, context.getString(R.string.stability)));
+        presets.add(new Box64Preset(Box64Preset.STABILITY, context.getString(R.string.compatibility_mode)));
         presets.add(new Box64Preset(Box64Preset.CONSERVATIVE, context.getString(R.string.conservative)));
-        presets.add(new Box64Preset(Box64Preset.INTERMEDIATE, context.getString(R.string.intermediate)));
+        presets.add(new Box64Preset(Box64Preset.INTERMEDIATE, context.getString(R.string.balanced_mode)));
         presets.add(new Box64Preset(Box64Preset.PERFORMANCE, context.getString(R.string.performance)));
         for (String[] preset : customPresetsIterator(context)) presets.add(new Box64Preset(preset[0], preset[1]));
         return presets;
