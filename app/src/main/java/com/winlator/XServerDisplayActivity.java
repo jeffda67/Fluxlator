@@ -47,6 +47,7 @@ import com.winlator.contentdialog.VirGLConfigDialog;
 import com.winlator.contentdialog.WineD3DConfigDialog;
 import com.winlator.core.AppUtils;
 import com.winlator.core.DefaultVersion;
+import com.winlator.core.DiagnosticLogger;
 import com.winlator.core.EnvVars;
 import com.winlator.core.FileUtils;
 import com.winlator.core.GeneralComponents;
@@ -142,6 +143,8 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     public void onCreate(Bundle savedInstanceState) {
         AppUtils.setActivityTheme(this);
         super.onCreate(savedInstanceState);
+        DiagnosticLogger.info("Session", "Starting game session; containerId=" + getIntent().getIntExtra("container_id", 0) +
+            ", shortcut=" + (getIntent().getStringExtra("shortcut_path") != null));
         AppUtils.hideSystemUI(this);
         AppUtils.keepScreenOn(this);
         setContentView(R.layout.xserver_display_activity);
@@ -169,7 +172,13 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         if (!isGenerateWineprefix()) {
             ContainerManager containerManager = new ContainerManager(this);
             container = containerManager.getContainerById(getIntent().getIntExtra("container_id", 0));
+            if (container == null) {
+                DiagnosticLogger.error("Session", "Container id was not found; startup stopped", null);
+                finish();
+                return;
+            }
             containerManager.activateContainer(container);
+            DiagnosticLogger.info("Session", "Container loaded: " + container.getName());
 
             boolean wineprefixNeedsUpdate = container.getExtra("wineprefixNeedsUpdate").equals("t");
             if (wineprefixNeedsUpdate) {
@@ -361,6 +370,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
     @Override
     protected void onDestroy() {
+        DiagnosticLogger.info("Session", "Game session activity destroyed");
         winHandler.stop();
         if (environment != null) environment.stopEnvironmentComponents();
         ForegroundService.stopSession(this);
@@ -1160,4 +1170,3 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         else return false;
     }
 }
-

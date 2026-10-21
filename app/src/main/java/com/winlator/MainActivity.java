@@ -28,6 +28,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.winlator.contentdialog.AboutDialog;
 import com.winlator.core.AppUtils;
 import com.winlator.core.Callback;
+import com.winlator.core.DiagnosticLogger;
 import com.winlator.core.LocaleHelper;
 import com.winlator.core.PreloaderDialog;
 import com.winlator.xenvironment.RootFSInstaller;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         AppUtils.setActivityTheme(this);
         super.onCreate(savedInstanceState);
+        DiagnosticLogger.info("Startup", "MainActivity onCreate; savedState=" + (savedInstanceState != null));
         setContentView(R.layout.main_activity);
 
         drawerLayout = findViewById(R.id.DrawerLayout);
@@ -74,12 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else {
             boolean showShortcutsFirst = preferences.getBoolean("show_shortcuts_first", false);
             int selectedMenuItemId = intent.getIntExtra("selected_menu_item_id", 0);
-            int menuItemId = selectedMenuItemId > 0 ? selectedMenuItemId : (showShortcutsFirst ? R.id.menu_item_shortcuts : R.id.menu_item_containers);
+            int menuItemId = selectedMenuItemId > 0 ? selectedMenuItemId : (showShortcutsFirst ? R.id.menu_item_shortcuts : R.id.menu_item_library);
 
             actionBar.setHomeAsUpIndicator(R.drawable.icon_action_bar_menu);
             onNavigationItemSelected(navigationView.getMenu().findItem(menuItemId));
             navigationView.setCheckedItem(menuItemId);
-            if (!requestAppPermissions()) RootFSInstaller.installIfNeeded(this);
+            if (!requestAppPermissions()) {
+                DiagnosticLogger.info("Startup", "Permissions ready; checking system files");
+                RootFSInstaller.installIfNeeded(this);
+            }
 
             int containerId = intent.getIntExtra("container_id", 0);
             String startPath = intent.getStringExtra("start_path");
@@ -132,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 BaseFileManagerFragment fileManagerFragment = (BaseFileManagerFragment)currentFragment;
                 if (fileManagerFragment.onBackPressed()) return;
             }
-            else if (currentFragment instanceof ContainersFragment) {
+            else if (currentFragment instanceof ContainersFragment || currentFragment instanceof GameLibraryFragment) {
                 finish();
             }
         }
@@ -190,6 +195,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 preferences.edit().putBoolean("show_shortcuts_first", true).apply();
                 showFragment(new ShortcutsFragment());
                 break;
+            case R.id.menu_item_library:
+                preferences.edit().putBoolean("show_shortcuts_first", false).apply();
+                showFragment(new GameLibraryFragment());
+                break;
             case R.id.menu_item_containers:
                 preferences.edit().putBoolean("show_shortcuts_first", false).apply();
                 showFragment(new ContainersFragment());
@@ -199,6 +208,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.menu_item_settings:
                 showFragment(new SettingsFragment());
+                break;
+            case R.id.menu_item_diagnostics:
+                showFragment(new DiagnosticsFragment());
                 break;
             case R.id.menu_item_about:
                 (new AboutDialog(this)).show();
@@ -210,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit, R.anim.fragment_enter, R.anim.fragment_exit)
             .replace(R.id.FLFragmentContainer, fragment)
             .commit();
 

@@ -157,14 +157,21 @@ public class ContainerDetailFragment extends Fragment {
         sHUDMode.setSelection(isEditMode() ? container.getHUDMode() : FrameRating.Mode.DISABLED.ordinal());
 
         final Spinner sStartupSelection = view.findViewById(R.id.SStartupSelection);
-        byte oldStartupSelection = isEditMode() ? container.getStartupSelection() : -1;
-        sStartupSelection.setSelection(oldStartupSelection != -1 ? oldStartupSelection : Container.STARTUP_SELECTION_ESSENTIAL);
+        String defaultProfile = preferences.getString("default_gaming_profile", "balanced");
+        byte oldStartupSelection = isEditMode() ? container.getStartupSelection() :
+            ("compatibility".equals(defaultProfile) ? Container.STARTUP_SELECTION_NORMAL : Container.STARTUP_SELECTION_ESSENTIAL);
+        sStartupSelection.setSelection(oldStartupSelection);
 
         final Spinner sWinVersion = view.findViewById(R.id.SWinVersion);
         sWinVersion.setTag((byte)-1);
 
         final Spinner sBox64Preset = view.findViewById(R.id.SBox64Preset);
-        String initialBox64Preset = isEditMode() ? container.getBox64Preset() : preferences.getString("box64_preset", Box64Preset.DEFAULT);
+        String initialBox64Preset;
+        if (isEditMode()) initialBox64Preset = container.getBox64Preset();
+        else if ("performance".equals(defaultProfile)) initialBox64Preset = Box64Preset.PERFORMANCE;
+        else if ("compatibility".equals(defaultProfile)) initialBox64Preset = Box64Preset.STABILITY;
+        else if ("balanced".equals(defaultProfile)) initialBox64Preset = Box64Preset.INTERMEDIATE;
+        else initialBox64Preset = preferences.getString("box64_preset", Box64Preset.DEFAULT);
         Box64PresetManager.loadSpinner(sBox64Preset, initialBox64Preset);
 
         final Spinner sGamingProfile = view.findViewById(R.id.SGamingProfile);

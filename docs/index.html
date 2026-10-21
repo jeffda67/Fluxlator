@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0713">
-  <meta name="description" content="Fluxlator is a community Winlator build for Android with Performance, Balanced, and Compatibility container profiles.">
-  <title>Fluxlator — tune your Windows game containers</title>
+  <meta name="description" content="Fluxlator is a purple, game-library-first Windows game launcher for Android, with searchable shortcuts, container profiles, and private startup diagnostics.">
+  <title>Fluxlator — your PC games, in orbit</title>
   <style>
     :root {
       color-scheme: dark;
@@ -66,6 +66,15 @@
     .profile:nth-child(3) .profile-icon { color: var(--violet); background: #e4a3ff18; }
     .profile strong { display: block; font-size: .88rem; }
     .profile small { display: block; color: var(--muted); font-size: .75rem; }
+    .game-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+    .game-tile { min-height: 155px; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 13px; border: 1px solid #ffffff20; border-radius: 14px; box-shadow: 0 14px 28px #0003; transition: transform .22s ease, box-shadow .22s ease; animation: card-rise .55s both; }
+    .game-tile:hover { transform: translateY(-4px) scale(1.015); box-shadow: 0 20px 34px #0005; }
+    .game-tile span, .game-tile small { font-size: .6rem; font-weight: 800; letter-spacing: .1em; }
+    .game-tile strong { font-size: 1.05rem; line-height: 1.08; letter-spacing: -.035em; }
+    .game-tile small { color: #ffffffc9; }
+    .tile-one { background: radial-gradient(circle at 80% 20%, #c7aeff77, transparent 44%), linear-gradient(145deg, #7444c4, #302057); }
+    .tile-two { background: radial-gradient(circle at 25% 15%, #72d8ff66, transparent 45%), linear-gradient(145deg, #336ca1, #1b284f); animation-delay: .12s; }
+    @keyframes card-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
     section { padding: 54px 0; }
     .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 23px; }
     h2 { margin: 7px 0 0; font-size: clamp(1.75rem, 3.6vw, 2.55rem); line-height: 1.12; letter-spacing: -.04em; }
@@ -114,7 +123,7 @@
       footer { gap: 12px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -126,6 +135,7 @@
         Fluxlator
       </a>
       <nav aria-label="Main navigation">
+        <a href="#library">Library</a>
         <a href="#profiles">Profiles</a>
         <a href="#getting-started">Getting started</a>
         <a href="https://github.com/jeffda67/Fluxlator">Source</a>
@@ -135,25 +145,41 @@
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div>
-          <div class="eyebrow">Community Winlator build · Android</div>
-          <h1 id="hero-title">More control for your <span>game setup.</span></h1>
-          <p class="lead">Fluxlator brings quick, per-container tuning profiles to Winlator, so you can choose the balance that fits your device and the game you want to run.</p>
+          <div class="eyebrow">A game library for Android · ARM64</div>
+          <h1 id="hero-title">Your PC games, <span>in orbit.</span></h1>
+          <p class="lead">Fluxlator puts your Windows game shortcuts, container profiles, and startup diagnostics into a purple, game-first launcher designed for handheld play.</p>
           <div class="actions">
-            <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.1/Fluxlator.apk" aria-label="Download Fluxlator version 0.1.1 APK">Download APK <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.2/Fluxlator.apk" aria-label="Download Fluxlator version 0.1.2 APK">Download APK <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="https://github.com/jeffda67/Fluxlator/releases">View all releases</a>
           </div>
-          <p class="fine">Preview 0.1.1 · ARM64 Android · Debug-signed sideload build</p>
+          <p class="fine">Preview 0.1.2 · ARM64 Android · Debug-signed sideload build</p>
         </div>
 
-        <div class="device-card" aria-label="Illustration of Fluxlator's container profiles">
-          <div class="card-top"><span>CONTAINER SETTINGS</span><span class="online">Ready to tune</span></div>
-          <p class="mock-title">Choose a profile</p>
-          <p class="mock-subtitle">Settings are applied to this container</p>
-          <div class="profile-list">
-            <div class="profile active"><span class="profile-icon">↑</span><span><strong>Performance</strong><small>Prioritize speed</small></span></div>
-            <div class="profile"><span class="profile-icon">↔</span><span><strong>Balanced</strong><small>Everyday starting point</small></span></div>
-            <div class="profile"><span class="profile-icon">◇</span><span><strong>Compatibility</strong><small>Favor stability</small></span></div>
+        <div class="device-card" aria-label="Illustration of the Fluxlator game library">
+          <div class="card-top"><span>FLUXLATOR GAME DECK</span><span class="online">Library ready</span></div>
+          <p class="mock-title">Pick up where you left off</p>
+          <p class="mock-subtitle">Search your games, check the active profile, press play.</p>
+          <div class="game-strip" aria-hidden="true">
+            <div class="game-tile tile-one"><span>WINDOWS GAME</span><strong>Nightfall<br>Racer</strong><small>PLAY NOW ↗</small></div>
+            <div class="game-tile tile-two"><span>WINDOWS GAME</span><strong>Starlight<br>Quest</strong><small>PLAY NOW ↗</small></div>
           </div>
+          <div class="profile-list">
+            <div class="profile active"><span class="profile-icon">↑</span><span><strong>Performance</strong><small>Fast Box64 preset · Essential startup</small></span></div>
+            <div class="profile"><span class="profile-icon">◇</span><span><strong>Balanced / Compatibility</strong><small>Per-container tuning when you need it</small></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="library" aria-labelledby="library-title">
+        <div class="section-head">
+          <div><div class="eyebrow">Game first</div><h2 id="library-title">A launcher built around your library.</h2></div>
+          <p>Open straight into your game collection, search Windows shortcuts, and launch a game without starting from a container list.</p>
+        </div>
+        <div class="grid">
+          <article class="mode"><span class="tag">DISCOVER</span><h3>Searchable library</h3><p>Find installed shortcuts by game or container name. The last game you launched moves to the front.</p></article>
+          <article class="mode"><span class="tag">PLAY</span><h3>Quick launch</h3><p>Launch a title or start a container from the dashboard, with its active Box64 profile shown on the card.</p></article>
+          <article class="mode"><span class="tag">TUNE</span><h3>Game profiles</h3><p>Set Performance, Balanced, or Compatibility as the starting profile for new containers.</p></article>
+          <article class="mode"><span class="tag">DIAGNOSE</span><h3>Private error logs</h3><p>Inspect startup events and crash traces on-device, then copy or share a report when you choose.</p></article>
         </div>
       </section>
 
@@ -176,7 +202,7 @@
           <p>Fluxlator runs Windows software through Wine and related compatibility components. Results depend on your hardware and the title.</p>
         </div>
         <div class="steps">
-          <article class="step"><h3>Download the APK</h3><p>Open the release below on your ARM64 Android device and download the 0.1.1 APK.</p></article>
+          <article class="step"><h3>Download the APK</h3><p>Open the release below on your ARM64 Android device and download the 0.1.2 APK.</p></article>
           <article class="step"><h3>Install on Android</h3><p>Open the downloaded file. Android may ask you to allow installs from the app opening the APK.</p></article>
           <article class="step"><h3>Create a container</h3><p>Choose a profile in the container settings, then add your own legally obtained Windows software.</p></article>
         </div>
@@ -184,12 +210,12 @@
 
       <div class="notice" role="note">
         <span class="notice-mark" aria-hidden="true">i</span>
-        <p><strong>Community preview.</strong> Fluxlator is derived from <a href="https://github.com/brunodev85/winlator-app">Winlator</a> and is not an official Winlator release. This build is debug-signed and may not run every game. Roblox compatibility is not guaranteed; Fluxlator does not hide from or bypass anti-cheat systems. Windows and game licenses are not included.</p>
+        <p><strong>Community preview.</strong> Fluxlator is derived from <a href="https://github.com/brunodev85/winlator-app">Winlator</a> and is not an official Winlator release. It currently launches user-created Windows shortcuts and does not connect Steam, Epic, GOG, or Amazon libraries. This build is debug-signed and may not run every game. Roblox compatibility is not guaranteed; Fluxlator does not hide from or bypass anti-cheat systems. Windows and game licenses are not included.</p>
       </div>
 
       <section class="release" aria-labelledby="release-title">
-        <div><div class="eyebrow">Available now</div><h2 id="release-title">Fluxlator 0.1.1 preview</h2><p>ARM64 APK · Debug-signed</p></div>
-        <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.1/Fluxlator.apk">Get the APK <span aria-hidden="true">↓</span></a>
+        <div><div class="eyebrow">Available now</div><h2 id="release-title">Fluxlator 0.1.2 preview</h2><p>ARM64 APK · Debug-signed</p></div>
+        <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.2/Fluxlator.apk">Get the APK <span aria-hidden="true">↓</span></a>
       </section>
     </main>
 
@@ -200,4 +226,3 @@
   </div>
 </body>
 </html>
-

@@ -1,13 +1,15 @@
 # Fluxlator
 
-Fluxlator is a community-modified Winlator build for Android. It adds per-container **Performance**, **Balanced**, and **Compatibility** profiles, plus a **Custom** option for manual tuning.
+Fluxlator is a community-modified Winlator build with a game-first Android launcher. It opens to a searchable library of Windows shortcuts, keeps the last launched title at the front, shows each container's Box64 profile, and includes private startup/crash diagnostics.
 
 **Website:** https://jeffda67.github.io/Fluxlator/  
 **Download:** [Fluxlator releases](https://github.com/jeffda67/Fluxlator/releases)
 
 ## Current APK
 
-Version 0.1.1 is a debug-signed preview APK for ARM64 Android devices. It adds a purple Fluxlator theme and reports environment startup failures instead of silently leaving the startup overlay open. Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
+Version 0.1.2 is a debug-signed preview APK for ARM64 Android devices. The new game-library dashboard includes search, quick launch, a recent-game shortcut, motion effects, and a default profile picker for new containers. Diagnostics records startup milestones, system-file extraction progress, runtime process launch errors, and uncaught crashes in a bounded app-private log. Reports are never uploaded automatically; the user chooses whether to copy or share them. Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
+
+Fluxlator currently launches user-created Windows shortcuts; it does not integrate Steam, Epic, GOG, or Amazon accounts or download game files.
 
 ## Profiles
 
@@ -37,4 +39,3 @@ Fluxlator is derived from [Winlator](https://github.com/brunodev85/winlator-app)
 ## Limitations
 
 Fluxlator does not include Windows or game licenses. It does not guarantee that a particular Windows game will run. Use official game clients and follow each game's rules. This project does not provide anti-cheat evasion or detection bypasses.
-

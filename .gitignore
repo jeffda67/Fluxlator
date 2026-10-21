@@ -14,4 +14,4 @@
 .cxx
 /.android-sdk/
 local.properties
-
+/.gradle-build/

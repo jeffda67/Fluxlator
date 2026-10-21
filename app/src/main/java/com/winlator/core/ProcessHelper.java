@@ -94,6 +94,7 @@ public abstract class ProcessHelper {
         }
         catch (Exception e) {
             Log.e("Fluxlator", "Unable to start environment process", e);
+            DiagnosticLogger.error("Process", "Unable to start environment process", e);
         }
         return pid;
     }
@@ -353,4 +354,3 @@ public abstract class ProcessHelper {
         return result;
     }
 }
-
