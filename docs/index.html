@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1118">
+  <meta name="theme-color" content="#0b0713">
   <meta name="description" content="Fluxlator is a community Winlator build for Android with Performance, Balanced, and Compatibility container profiles.">
   <title>Fluxlator — tune your Windows game containers</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b1118;
-      --panel: #111a23;
-      --panel-2: #15212b;
-      --line: #273744;
-      --text: #edf5f7;
-      --muted: #a0b2bd;
-      --mint: #85f0c0;
-      --blue: #8ec8ff;
-      --violet: #c1a6ff;
+      --bg: #0b0713;
+      --panel: #171024;
+      --panel-2: #211531;
+      --line: #38294a;
+      --text: #f4ecff;
+      --muted: #b6a8c8;
+      --mint: #c49aff;
+      --blue: #aab7ff;
+      --violet: #e4a3ff;
       --amber: #ffcf85;
       --max: 1120px;
     }
@@ -25,7 +25,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: radial-gradient(ellipse at 80% -10%, #173745 0, transparent 43%), var(--bg);
+      background: radial-gradient(ellipse at 80% -10%, #3a1d58 0, transparent 43%), var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.6;
@@ -34,7 +34,7 @@
     .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
     header { height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ffffff12; }
     .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 1.1rem; font-weight: 750; letter-spacing: -.03em; }
-    .mark { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid #85f0c055; border-radius: 12px; background: linear-gradient(145deg, #85f0c025, #8ec8ff1c); color: var(--mint); }
+    .mark { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid #c49aff55; border-radius: 12px; background: linear-gradient(145deg, #c49aff25, #aab7ff1c); color: var(--mint); }
     .mark svg { width: 22px; height: 22px; }
     nav { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: .92rem; }
     nav a { text-decoration: none; }
@@ -47,23 +47,23 @@
     .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid transparent; border-radius: 12px; font-weight: 720; text-decoration: none; transition: transform .18s ease, background .18s ease; }
     .button:hover { transform: translateY(-2px); }
-    .button-primary { background: var(--mint); color: #07140f; }
-    .button-primary:hover { background: #a0f6d1; }
+    .button-primary { background: var(--mint); color: #1a1028; }
+    .button-primary:hover { background: #d4b6ff; }
     .button-secondary { border-color: var(--line); background: #ffffff08; color: var(--text); }
     .fine { margin: 14px 0 0; color: #8095a1; font-size: .84rem; }
-    .device-card { position: relative; overflow: hidden; min-height: 340px; padding: 26px; border: 1px solid #8de9c029; border-radius: 24px; background: linear-gradient(155deg, #18313a, #101923 62%); box-shadow: 0 28px 80px #0005; }
-    .device-card::after { position: absolute; right: -60px; bottom: -120px; width: 260px; height: 260px; border: 1px solid #85f0c022; border-radius: 50%; box-shadow: 0 0 0 30px #85f0c008, 0 0 0 60px #85f0c006; content: ""; }
+    .device-card { position: relative; overflow: hidden; min-height: 340px; padding: 26px; border: 1px solid #c49aff35; border-radius: 24px; background: linear-gradient(155deg, #2a1b40, #171021 62%); box-shadow: 0 28px 80px #0005; }
+    .device-card::after { position: absolute; right: -60px; bottom: -120px; width: 260px; height: 260px; border: 1px solid #c49aff22; border-radius: 50%; box-shadow: 0 0 0 30px #c49aff08, 0 0 0 60px #c49aff06; content: ""; }
     .card-top { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .78rem; }
     .online { display: inline-flex; align-items: center; gap: 7px; }
-    .online::before { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); content: ""; box-shadow: 0 0 14px #85f0c0aa; }
+    .online::before { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); content: ""; box-shadow: 0 0 14px #c49affaa; }
     .mock-title { margin: 28px 0 5px; font-size: 1.1rem; font-weight: 720; }
     .mock-subtitle { margin: 0; color: var(--muted); font-size: .83rem; }
     .profile-list { display: grid; gap: 11px; margin-top: 22px; }
-    .profile { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #ffffff10; border-radius: 13px; background: #07101980; }
-    .profile.active { border-color: #85f0c077; background: #85f0c012; }
-    .profile-icon { display: grid; width: 31px; height: 31px; flex: 0 0 31px; place-items: center; border-radius: 9px; color: var(--mint); background: #85f0c018; font-weight: 800; }
-    .profile:nth-child(2) .profile-icon { color: var(--blue); background: #8ec8ff18; }
-    .profile:nth-child(3) .profile-icon { color: var(--violet); background: #c1a6ff18; }
+    .profile { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #ffffff10; border-radius: 13px; background: #15102080; }
+    .profile.active { border-color: #c49aff77; background: #c49aff12; }
+    .profile-icon { display: grid; width: 31px; height: 31px; flex: 0 0 31px; place-items: center; border-radius: 9px; color: var(--mint); background: #c49aff18; font-weight: 800; }
+    .profile:nth-child(2) .profile-icon { color: var(--blue); background: #aab7ff18; }
+    .profile:nth-child(3) .profile-icon { color: var(--violet); background: #e4a3ff18; }
     .profile strong { display: block; font-size: .88rem; }
     .profile small { display: block; color: var(--muted); font-size: .75rem; }
     section { padding: 54px 0; }
@@ -71,10 +71,10 @@
     h2 { margin: 7px 0 0; font-size: clamp(1.75rem, 3.6vw, 2.55rem); line-height: 1.12; letter-spacing: -.04em; }
     .section-head p { max-width: 470px; margin: 0; color: var(--muted); }
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
-    .mode { min-height: 193px; padding: 20px; border: 1px solid var(--line); border-radius: 17px; background: linear-gradient(160deg, #16232d, #101820); }
-    .mode .tag { display: inline-flex; padding: 4px 8px; border: 1px solid #85f0c044; border-radius: 999px; color: var(--mint); font-size: .7rem; font-weight: 700; }
-    .mode:nth-child(2) .tag { color: var(--blue); border-color: #8ec8ff44; }
-    .mode:nth-child(3) .tag { color: var(--violet); border-color: #c1a6ff44; }
+    .mode { min-height: 193px; padding: 20px; border: 1px solid var(--line); border-radius: 17px; background: linear-gradient(160deg, #241633, #171021); }
+    .mode .tag { display: inline-flex; padding: 4px 8px; border: 1px solid #c49aff44; border-radius: 999px; color: var(--mint); font-size: .7rem; font-weight: 700; }
+    .mode:nth-child(2) .tag { color: var(--blue); border-color: #aab7ff44; }
+    .mode:nth-child(3) .tag { color: var(--violet); border-color: #e4a3ff44; }
     .mode:nth-child(4) .tag { color: var(--amber); border-color: #ffcf8544; }
     .mode h3 { margin: 15px 0 5px; font-size: 1.04rem; }
     .mode p { margin: 0; color: var(--muted); font-size: .88rem; }
@@ -83,11 +83,11 @@
     .step::before { color: var(--mint); content: "0" counter(step); font-size: .78rem; font-weight: 800; letter-spacing: .12em; }
     .step h3 { margin: 12px 0 6px; font-size: 1rem; }
     .step p { margin: 0; color: var(--muted); font-size: .9rem; }
-    .notice { display: flex; gap: 15px; padding: 21px 23px; border: 1px solid #8ec8ff30; border-radius: 16px; background: #8ec8ff09; color: var(--muted); }
+    .notice { display: flex; gap: 15px; padding: 21px 23px; border: 1px solid #aab7ff30; border-radius: 16px; background: #aab7ff09; color: var(--muted); }
     .notice strong { color: var(--text); }
     .notice p { margin: 0; }
     .notice-mark { color: var(--blue); font-weight: 900; }
-    .release { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 30px 0 76px; padding: 27px 30px; border: 1px solid #85f0c044; border-radius: 20px; background: linear-gradient(100deg, #85f0c012, #8ec8ff08); }
+    .release { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 30px 0 76px; padding: 27px 30px; border: 1px solid #c49aff44; border-radius: 20px; background: linear-gradient(100deg, #c49aff12, #aab7ff08); }
     .release h2 { font-size: 1.45rem; }
     .release p { margin: 6px 0 0; color: var(--muted); font-size: .9rem; }
     footer { display: flex; justify-content: space-between; gap: 24px; padding: 25px 0 35px; border-top: 1px solid #ffffff12; color: #8396a1; font-size: .82rem; }
@@ -139,10 +139,10 @@
           <h1 id="hero-title">More control for your <span>game setup.</span></h1>
           <p class="lead">Fluxlator brings quick, per-container tuning profiles to Winlator, so you can choose the balance that fits your device and the game you want to run.</p>
           <div class="actions">
-            <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.0/Fluxlator.apk" aria-label="Download Fluxlator version 0.1.0 APK">Download APK <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.1/Fluxlator.apk" aria-label="Download Fluxlator version 0.1.1 APK">Download APK <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="https://github.com/jeffda67/Fluxlator/releases">View all releases</a>
           </div>
-          <p class="fine">Preview 0.1.0 · 64-bit ARM Android · Debug-signed sideload build</p>
+          <p class="fine">Preview 0.1.1 · ARM64 Android · Debug-signed sideload build</p>
         </div>
 
         <div class="device-card" aria-label="Illustration of Fluxlator's container profiles">
@@ -176,7 +176,7 @@
           <p>Fluxlator runs Windows software through Wine and related compatibility components. Results depend on your hardware and the title.</p>
         </div>
         <div class="steps">
-          <article class="step"><h3>Download the APK</h3><p>Open the release below on your ARM64 Android device and download the 0.1.0 APK.</p></article>
+          <article class="step"><h3>Download the APK</h3><p>Open the release below on your ARM64 Android device and download the 0.1.1 APK.</p></article>
           <article class="step"><h3>Install on Android</h3><p>Open the downloaded file. Android may ask you to allow installs from the app opening the APK.</p></article>
           <article class="step"><h3>Create a container</h3><p>Choose a profile in the container settings, then add your own legally obtained Windows software.</p></article>
         </div>
@@ -188,8 +188,8 @@
       </div>
 
       <section class="release" aria-labelledby="release-title">
-        <div><div class="eyebrow">Available now</div><h2 id="release-title">Fluxlator 0.1.0 preview</h2><p>ARM64 APK · 157.6 MB · Debug-signed</p></div>
-        <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.0/Fluxlator.apk">Get the APK <span aria-hidden="true">↓</span></a>
+        <div><div class="eyebrow">Available now</div><h2 id="release-title">Fluxlator 0.1.1 preview</h2><p>ARM64 APK · Debug-signed</p></div>
+        <a class="button button-primary" href="https://github.com/jeffda67/Fluxlator/releases/download/v0.1.1/Fluxlator.apk">Get the APK <span aria-hidden="true">↓</span></a>
       </section>
     </main>
 
@@ -200,3 +200,4 @@
   </div>
 </body>
 </html>
+

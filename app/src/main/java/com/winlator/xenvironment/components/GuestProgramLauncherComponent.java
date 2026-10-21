@@ -38,6 +38,7 @@ public class GuestProgramLauncherComponent extends EnvironmentComponent {
             extractBox64File();
             copyDefaultBox64RCFile();
             pid = execGuestProgram();
+            if (pid < 0) throw new IllegalStateException("Unable to start the Box64 guest process");
         }
     }
 
@@ -203,3 +204,4 @@ public class GuestProgramLauncherComponent extends EnvironmentComponent {
         }
     }
 }
+

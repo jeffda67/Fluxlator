@@ -18,6 +18,7 @@
     <string name="updating_system_files">Updating System Files...</string>
     <string name="starting_up">Starting up...</string>
     <string name="unable_to_install_system_files">Unable to install system files</string>
+    <string name="unable_to_start_container">Container startup failed. Check free storage and try the Compatibility profile.</string>
     <string name="keyboard">Keyboard</string>
     <string name="toggle_fullscreen">Toggle Fullscreen</string>
     <string name="exit">Exit</string>
@@ -363,3 +364,4 @@
     <string name="save_mem_on_run_from_steam">Save memory on run from Steam</string>
     <string name="present_mode">Present Mode</string>
 </resources>
+

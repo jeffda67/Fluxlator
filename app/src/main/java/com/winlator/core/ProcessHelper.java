@@ -3,6 +3,7 @@ package com.winlator.core;
 import android.os.Process;
 import android.system.Os;
 import android.system.OsConstants;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -74,7 +75,9 @@ public abstract class ProcessHelper {
             if (debugCallbacks.isEmpty()) processBuilder.redirectOutput(new File("/dev/null")).redirectErrorStream(true);
 
             Map<String, String> environment = processBuilder.environment();
-            for (String name : envVars) environment.put(name, envVars.get(name));
+            if (envVars != null) {
+                for (String name : envVars) environment.put(name, envVars.get(name));
+            }
 
             java.lang.Process process = processBuilder.start();
             Field pidField = process.getClass().getDeclaredField("pid");
@@ -89,7 +92,9 @@ public abstract class ProcessHelper {
 
             if (terminationCallback != null) createWaitForThread(process, terminationCallback);
         }
-        catch (Exception e) {}
+        catch (Exception e) {
+            Log.e("Fluxlator", "Unable to start environment process", e);
+        }
         return pid;
     }
 
@@ -348,3 +353,4 @@ public abstract class ProcessHelper {
         return result;
     }
 }
+

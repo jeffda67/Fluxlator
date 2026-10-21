@@ -5,9 +5,9 @@ Fluxlator is a community-modified Winlator build for Android. It adds per-contai
 **Website:** https://jeffda67.github.io/Fluxlator/  
 **Download:** [Fluxlator releases](https://github.com/jeffda67/Fluxlator/releases)
 
-## First APK
+## Current APK
 
-Version 0.1.0 is a debug-signed preview APK for ARM64 Android devices. It is intended for sideloading; Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
+Version 0.1.1 is a debug-signed preview APK for ARM64 Android devices. It adds a purple Fluxlator theme and reports environment startup failures instead of silently leaving the startup overlay open. Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
 
 ## Profiles
 
@@ -37,3 +37,4 @@ Fluxlator is derived from [Winlator](https://github.com/brunodev85/winlator-app)
 ## Limitations
 
 Fluxlator does not include Windows or game licenses. It does not guarantee that a particular Windows game will run. Use official game clients and follow each game's rules. This project does not provide anti-cheat evasion or detection bypasses.
+

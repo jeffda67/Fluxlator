@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -268,12 +269,31 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         setupUI();
 
         Executors.newSingleThreadExecutor().execute(() -> {
-            if (!isGenerateWineprefix()) {
-                setupWineSystemFiles();
-                extractGraphicsDriverFiles();
-                changeWineAudioDriver();
+            try {
+                if (!isGenerateWineprefix()) {
+                    setupWineSystemFiles();
+                    extractGraphicsDriverFiles();
+                    changeWineAudioDriver();
+                }
+                setupXEnvironment();
             }
-            setupXEnvironment();
+            catch (Exception | LinkageError e) {
+                Log.e("Fluxlator", "Container startup failed", e);
+                runOnUiThread(() -> {
+                    if (isFinishing()) return;
+                    preloaderDialog.close();
+                    if (environment != null) {
+                        try {
+                            environment.stopEnvironmentComponents();
+                        }
+                        catch (RuntimeException cleanupError) {
+                            Log.e("Fluxlator", "Unable to clean up the failed container startup", cleanupError);
+                        }
+                    }
+                    AppUtils.showToast(this, R.string.unable_to_start_container);
+                    finish();
+                });
+            }
         });
     }
 
@@ -1140,3 +1160,4 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         else return false;
     }
 }
+

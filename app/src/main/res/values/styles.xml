@@ -16,22 +16,25 @@
         <item name="android:toolbarStyle">@style/Toolbar</item>
         <item name="toolbarStyle">@style/Toolbar</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
-        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">?attr/colorPrimarySurface</item>
         <item name="android:radioButtonStyle">@style/RadioButton</item>
         <item name="radioButtonStyle">@style/RadioButton</item>
     </style>
     <style name="AppThemeLight" parent="@style/AppThemeBase">
-        <item name="colorAccent">#0288d1</item>
-        <item name="colorPrimary">#607d8b</item>
-        <item name="colorPrimaryDark">#455a64</item>
-        <item name="colorControlNormal">#e0e0e0</item>
-        <item name="colorPrimaryText">#424242</item>
-        <item name="colorSecondaryText">#757575</item>
-        <item name="colorPrimarySurface">#fafafa</item>
-        <item name="colorSecondarySurface">#ffffff</item>
-        <item name="colorPrimaryVariant">#607d8b</item>
-        <item name="colorSecondaryVariant">#d3dce0</item>
-        <item name="colorError">#ef5350</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="colorAccent">#7047B8</item>
+        <item name="colorPrimary">#7954B8</item>
+        <item name="colorPrimaryDark">#4F3179</item>
+        <item name="colorControlNormal">#B9A3D4</item>
+        <item name="colorPrimaryText">#2D2140</item>
+        <item name="colorSecondaryText">#6D627A</item>
+        <item name="colorPrimarySurface">#F2ECF8</item>
+        <item name="colorSecondarySurface">#FEFBFF</item>
+        <item name="colorPrimaryVariant">#6844A8</item>
+        <item name="colorSecondaryVariant">#D7C9E7</item>
+        <item name="colorError">#B3264A</item>
         <item name="popupMenuBackground">@drawable/content_dialog_background_light</item>
         <item name="toolboxBackground">@drawable/toolbox_light</item>
         <item name="panelBackground">@drawable/panel_background_light</item>
@@ -39,17 +42,19 @@
         <item name="progressBarIndeterminateImage">@drawable/progress_bar_indeterminate_light</item>
     </style>
     <style name="AppThemeDark" parent="@style/AppThemeBase">
-        <item name="colorAccent">#0288d1</item>
-        <item name="colorPrimary">#505963</item>
-        <item name="colorPrimaryDark">#3f474f</item>
-        <item name="colorControlNormal">#616161</item>
-        <item name="colorPrimaryText">#fafafa</item>
-        <item name="colorSecondaryText">#9e9e9e</item>
-        <item name="colorPrimarySurface">#1b1e21</item>
-        <item name="colorSecondarySurface">#2d3238</item>
-        <item name="colorPrimaryVariant">#56677a</item>
-        <item name="colorSecondaryVariant">#37424f</item>
-        <item name="colorError">#ef5350</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="colorAccent">#C49AFF</item>
+        <item name="colorPrimary">#8A4DDB</item>
+        <item name="colorPrimaryDark">#45236E</item>
+        <item name="colorControlNormal">#A88FC8</item>
+        <item name="colorPrimaryText">#F8F1FF</item>
+        <item name="colorSecondaryText">#C5B8D3</item>
+        <item name="colorPrimarySurface">#1C1030</item>
+        <item name="colorSecondarySurface">#2B1A42</item>
+        <item name="colorPrimaryVariant">#B18BE7</item>
+        <item name="colorSecondaryVariant">#3A2948</item>
+        <item name="colorError">#FF8A9B</item>
         <item name="popupMenuBackground">@drawable/content_dialog_background_dark</item>
         <item name="toolboxBackground">@drawable/toolbox_dark</item>
         <item name="panelBackground">@drawable/panel_background_dark</item>
@@ -298,3 +303,4 @@
         <item name="android:padding">6dp</item>
     </style>
 </resources>
+
