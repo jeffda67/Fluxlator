@@ -22,7 +22,10 @@ import androidx.fragment.app.Fragment;
 import com.winlator.core.AppUtils;
 import com.winlator.core.DiagnosticLogger;
 
+import java.util.regex.Pattern;
+
 public class DiagnosticsFragment extends Fragment {
+    private static final Pattern LOG_ENTRY_HEADER = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}T\\S+ (INFO|WARN|ERROR|FATAL)/");
     private TextView logText;
     private boolean errorsOnly;
 
@@ -96,25 +99,25 @@ public class DiagnosticsFragment extends Fragment {
     private void refreshLogs() {
         if (logText == null) return;
         String all = DiagnosticLogger.readAll();
-        if (errorsOnly) {
-            StringBuilder filtered = new StringBuilder();
-            for (String line : all.split("\\n")) {
-                if (line.contains("ERROR/") || line.contains("FATAL/") || line.contains("WARN/")) filtered.append(line).append('\n');
-            }
-            logText.setText(filtered.length() > 0 ? filtered.toString() : getString(R.string.no_errors_logged));
-        }
-        else logText.setText(all);
+        String filtered = errorsOnly ? filterErrorEntries(all) : all;
+        logText.setText(filtered.length() > 0 ? filtered : getString(R.string.no_errors_logged));
     }
 
     private String currentLogs() {
-        if (errorsOnly) {
-            StringBuilder filtered = new StringBuilder();
-            for (String line : DiagnosticLogger.readAll().split("\\n")) {
-                if (line.contains("ERROR/") || line.contains("FATAL/") || line.contains("WARN/")) filtered.append(line).append('\n');
+        String all = DiagnosticLogger.readAll();
+        return errorsOnly ? filterErrorEntries(all) : all;
+    }
+
+    private static String filterErrorEntries(String logs) {
+        StringBuilder filtered = new StringBuilder();
+        boolean includeEntry = false;
+        for (String line : logs.split("\\n", -1)) {
+            if (LOG_ENTRY_HEADER.matcher(line).find()) {
+                includeEntry = line.contains("ERROR/") || line.contains("FATAL/") || line.contains("WARN/");
             }
-            return filtered.toString();
+            if (includeEntry) filtered.append(line).append('\n');
         }
-        return DiagnosticLogger.readAll();
+        return filtered.toString();
     }
 
     private void copyLogs() {

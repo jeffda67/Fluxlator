@@ -287,6 +287,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 setupXEnvironment();
             }
             catch (Exception | LinkageError e) {
+                DiagnosticLogger.error("Session", "Container startup failed", e);
                 Log.e("Fluxlator", "Container startup failed", e);
                 runOnUiThread(() -> {
                     if (isFinishing()) return;

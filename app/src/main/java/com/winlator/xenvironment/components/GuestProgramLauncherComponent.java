@@ -10,6 +10,7 @@ import com.winlator.box64.Box64Preset;
 import com.winlator.box64.Box64PresetManager;
 import com.winlator.core.Callback;
 import com.winlator.core.DefaultVersion;
+import com.winlator.core.DiagnosticLogger;
 import com.winlator.core.EnvVars;
 import com.winlator.core.FileUtils;
 import com.winlator.core.GeneralComponents;
@@ -118,14 +119,31 @@ public class GuestProgramLauncherComponent extends EnvironmentComponent {
 
     private void extractBox64File() {
         Context context = environment.getContext();
+        RootFS rootFS = environment.getRootFS();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String box64Version = preferences.getString("box64_version", DefaultVersion.BOX64);
         String currentBox64Version = preferences.getString("current_box64_version", "");
+        File box64Binary = new File(rootFS.getRootDir(), "/usr/local/bin/box64");
+        boolean binaryReady = box64Binary.isFile() && box64Binary.length() > 0 && box64Binary.canExecute();
 
-        if (!box64Version.equals(currentBox64Version)) {
-            GeneralComponents.extractFile(GeneralComponents.Type.BOX64, context, box64Version, DefaultVersion.BOX64);
-            preferences.edit().putString("current_box64_version", box64Version).apply();
+        if (box64Version.equals(currentBox64Version) && binaryReady) return;
+
+        DiagnosticLogger.info("Box64", "Extracting Box64; requestedVersion=" + box64Version +
+            ", recordedVersion=" + currentBox64Version + ", binaryReady=" + binaryReady +
+            ", freeBytes=" + rootFS.getRootDir().getUsableSpace());
+        FileUtils.delete(box64Binary);
+        boolean extracted = GeneralComponents.extractFile(GeneralComponents.Type.BOX64, context, box64Version, DefaultVersion.BOX64);
+        binaryReady = box64Binary.isFile() && box64Binary.length() > 0 && box64Binary.canExecute();
+        if (!extracted || !binaryReady) {
+            preferences.edit().remove("current_box64_version").apply();
+            DiagnosticLogger.error("Box64", "Box64 extraction failed; requestedVersion=" + box64Version +
+                ", extractionReportedSuccess=" + extracted + ", binaryReady=" + binaryReady +
+                ", binaryBytes=" + box64Binary.length() + ", freeBytes=" + rootFS.getRootDir().getUsableSpace(), null);
+            throw new IllegalStateException("Box64 could not be installed. Check available internal storage, then retry.");
         }
+
+        preferences.edit().putString("current_box64_version", box64Version).apply();
+        DiagnosticLogger.info("Box64", "Box64 ready; version=" + box64Version + ", bytes=" + box64Binary.length());
     }
 
     private void copyDefaultBox64RCFile() {
@@ -204,4 +222,3 @@ public class GuestProgramLauncherComponent extends EnvironmentComponent {
         }
     }
 }
-

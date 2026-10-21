@@ -7,7 +7,7 @@ Fluxlator is a community-modified Winlator build with a game-first Android launc
 
 ## Current APK
 
-Version 0.1.2 is a debug-signed preview APK for ARM64 Android devices. The new game-library dashboard includes search, quick launch, a recent-game shortcut, motion effects, and a default profile picker for new containers. Diagnostics records startup milestones, system-file extraction progress, runtime process launch errors, and uncaught crashes in a bounded app-private log. Reports are never uploaded automatically; the user chooses whether to copy or share them. Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
+Version 0.1.3 is a debug-signed preview APK for ARM64 Android devices. It includes a game-library dashboard, container performance profiles, and private diagnostic logs. Box64 is re-extracted when its executable is missing, and extraction failures report whether storage may be insufficient. Error-only logs retain stack traces. Reports are never uploaded automatically; the user chooses whether to copy or share them. Android may ask you to allow installation from the app you use to open the APK. Performance and game compatibility vary by device and title. Roblox support is not guaranteed, and this build does not bypass or hide from anti-cheat systems.
 
 Fluxlator currently launches user-created Windows shortcuts; it does not integrate Steam, Epic, GOG, or Amazon accounts or download game files.
 

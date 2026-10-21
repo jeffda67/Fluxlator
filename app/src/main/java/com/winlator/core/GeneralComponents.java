@@ -202,25 +202,25 @@ public abstract class GeneralComponents {
         return type.getSource(context, identifier).getPath();
     }
 
-    public static void extractFile(Type type, Context context, String identifier, String defaultVersion) {
-        extractFile(type, context, identifier, defaultVersion, null);
+    public static boolean extractFile(Type type, Context context, String identifier, String defaultVersion) {
+        return extractFile(type, context, identifier, defaultVersion, null);
     }
 
-    public static void extractFile(Type type, Context context, String identifier, String defaultVersion, TarCompressorUtils.OnExtractFileListener onExtractFileListener) {
+    public static boolean extractFile(Type type, Context context, String identifier, String defaultVersion, TarCompressorUtils.OnExtractFileListener onExtractFileListener) {
         File destination = type.getDestination(context);
 
         if (isBuiltinComponent(type, identifier)) {
             String sourcePath = type.assetFolder()+"/"+type.lowerName()+"-"+identifier+".tzst";
-            TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, context, sourcePath, destination, onExtractFileListener);
+            return TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, context, sourcePath, destination, onExtractFileListener);
         }
         else {
             File componentDir = getComponentDir(type, context);
             File source = new File(componentDir, type.lowerName()+"-"+identifier+".tzst");
             boolean success = TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, source, destination, onExtractFileListener);
-            if (!success) {
-                String sourcePath = type.assetFolder()+"/"+type.lowerName()+"-"+defaultVersion+".tzst";
-                TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, context, sourcePath, destination, onExtractFileListener);
-            }
+            if (success) return true;
+
+            String sourcePath = type.assetFolder()+"/"+type.lowerName()+"-"+defaultVersion+".tzst";
+            return TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, context, sourcePath, destination, onExtractFileListener);
         }
     }
 
